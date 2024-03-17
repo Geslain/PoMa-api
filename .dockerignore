@@ -1,0 +1,11 @@
+.git
+.Dockerfile
+.dockerignore
+node_modules
+npm-debug.log
+dist
+
+.husky
+test
+README.md
+LICENSE
