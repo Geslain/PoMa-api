@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import {MongooseModule} from "@nestjs/mongoose";
-import {ConfigModule} from "@nestjs/config";
+import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule } from '@nestjs/config';
 import { ProjectModule } from './project/project.module';
-import { UserModule } from './user/user.module';
+import { UsersModule } from './users/users.module';
 import { TaskModule } from './task/task.module';
 
 @Module({
@@ -18,9 +18,10 @@ import { TaskModule } from './task/task.module';
       },
     }),
     ProjectModule,
-    UserModule,
+    UsersModule,
     TaskModule,
-  ],  controllers: [AppController],
+  ],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
