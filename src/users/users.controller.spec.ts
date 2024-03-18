@@ -3,31 +3,16 @@ import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { createMockedUser } from './hepers/tests';
 
 describe('Users Controller', () => {
   let controller: UsersController;
   let service: UsersService;
 
-  /**
-   * Create mocked data for user
-   *
-   * @param id
-   * @param withId
-   */
-  function createMockedUser(id: string | number, withId = false) {
-    return {
-      firstname: `foo${id}`,
-      lastname: `bar${id}`,
-      email: `foo.bar${id}@foobar.com`,
-      password: `foobar${id}`,
-      ...(withId && { _id: id.toString() }),
-    };
-  }
-
   const createUserDto: CreateUserDto = createMockedUser(1);
   const updateUserDto: UpdateUserDto = createMockedUser('Updated');
-  const findOneId = 'findId';
-  const findOnUser = createMockedUser(findOneId, true);
+  const userId = 'findId';
+  const mockedUser = createMockedUser(userId, true);
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -45,7 +30,8 @@ describe('Users Controller', () => {
               ]),
             create: jest.fn().mockResolvedValue(createUserDto),
             update: jest.fn().mockResolvedValue(updateUserDto),
-            findOne: jest.fn().mockResolvedValue(findOnUser),
+            findOne: jest.fn().mockResolvedValue(mockedUser),
+            remove: jest.fn().mockResolvedValue(mockedUser),
           },
         },
       ],
@@ -59,7 +45,6 @@ describe('Users Controller', () => {
     it('should create a new user', async () => {
       const createSpy = jest
         .spyOn(service, 'create')
-        // TODO fix this type conflict
         .mockResolvedValueOnce(createMockedUser(1) as any);
 
       await controller.create(createUserDto);
@@ -71,7 +56,6 @@ describe('Users Controller', () => {
     it('should update an user', async () => {
       const updateSpy = jest
         .spyOn(service, 'update')
-        // TODO fix this type conflict
         .mockResolvedValueOnce(createMockedUser(1) as any);
 
       await controller.update('id', updateUserDto);
@@ -92,10 +76,19 @@ describe('Users Controller', () => {
 
   describe('findOne()', () => {
     it('should return a user get by id parameter', async () => {
-      await expect(controller.findOne(findOneId)).resolves.toEqual(
-        createMockedUser(findOneId, true),
+      await expect(controller.findOne(userId)).resolves.toEqual(
+        createMockedUser(userId, true),
       );
-      expect(service.findOne).toHaveBeenCalledWith(findOneId);
+      expect(service.findOne).toHaveBeenCalledWith(userId);
+    });
+  });
+
+  describe('remove()', () => {
+    it('should return a user get by id parameter', async () => {
+      await expect(controller.remove(userId)).resolves.toEqual(
+        createMockedUser(userId, true),
+      );
+      expect(service.remove).toHaveBeenCalledWith(userId);
     });
   });
 });
