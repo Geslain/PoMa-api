@@ -9,8 +9,10 @@ describe('Users Controller', () => {
   let service: UsersService;
 
   /**
-   * Create a mocked data for user
+   * Create mocked data for user
+   *
    * @param id
+   * @param withId
    */
   function createMockedUser(id: string | number, withId = false) {
     return {
@@ -26,11 +28,6 @@ describe('Users Controller', () => {
   const updateUserDto: UpdateUserDto = createMockedUser('Updated');
   const findOneId = 'findId';
   const findOnUser = createMockedUser(findOneId, true);
-
-  const mockUser = {
-    ...createUserDto,
-    _id: '-1' as any,
-  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -63,7 +60,7 @@ describe('Users Controller', () => {
       const createSpy = jest
         .spyOn(service, 'create')
         // TODO fix this type conflict
-        .mockResolvedValueOnce(mockUser as any);
+        .mockResolvedValueOnce(createMockedUser(1) as any);
 
       await controller.create(createUserDto);
       expect(createSpy).toHaveBeenCalledWith(createUserDto);
@@ -74,7 +71,8 @@ describe('Users Controller', () => {
     it('should update an user', async () => {
       const updateSpy = jest
         .spyOn(service, 'update')
-        .mockResolvedValueOnce(mockUser as any);
+        // TODO fix this type conflict
+        .mockResolvedValueOnce(createMockedUser(1) as any);
 
       await controller.update('id', updateUserDto);
       expect(updateSpy).toHaveBeenCalledWith('id', updateUserDto);
