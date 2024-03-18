@@ -20,13 +20,11 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "lint-staged": {
-    "./src/**/*.ts": [
-      "prettier --write",
-      "npm run lint"
+    "{src,test}/**/*.ts": [
+      "prettier --write"
     ],
-    "./test/**/*.ts": [
-      "prettier --write",
-      "npm run lint"
+    "{src,apps,libs,test}/**/*.ts": [
+      "eslint --fix"
     ]
   },
   "dependencies": {
