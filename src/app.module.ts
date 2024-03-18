@@ -3,6 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {MongooseModule} from "@nestjs/mongoose";
 import {ConfigModule} from "@nestjs/config";
+import { ProjectModule } from './project/project.module';
+import { UserModule } from './user/user.module';
+import { TaskModule } from './task/task.module';
 
 @Module({
   imports: [
@@ -14,6 +17,9 @@ import {ConfigModule} from "@nestjs/config";
         password: process.env.DATABASE_PASSWORD,
       },
     }),
+    ProjectModule,
+    UserModule,
+    TaskModule,
   ],  controllers: [AppController],
   providers: [AppService],
 })
