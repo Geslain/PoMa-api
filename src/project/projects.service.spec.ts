@@ -22,4 +22,6 @@ describe('ProjectsService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  // TODO implement tests
 });
