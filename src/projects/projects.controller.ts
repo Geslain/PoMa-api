@@ -16,44 +16,44 @@ import { UpdateTaskDto } from '../tasks/dto/update-task.dto';
 
 @Controller('projects')
 export class ProjectsController {
-  constructor(private readonly projectService: ProjectsService) {}
+  constructor(private readonly projectsService: ProjectsService) {}
 
   @Post()
   create(@Body() createProjectDto: CreateProjectDto) {
-    return this.projectService.create(createProjectDto);
+    return this.projectsService.create(createProjectDto);
   }
 
   @Get()
   findAll() {
-    return this.projectService.findAll();
+    return this.projectsService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.projectService.findOne(id);
+    return this.projectsService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto) {
-    return this.projectService.update(id, updateProjectDto);
+    return this.projectsService.update(id, updateProjectDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.projectService.remove(id);
+    return this.projectsService.remove(id);
   }
 
   // Members
   @Post(':id/add-member')
   addMember(@Param('id') id: string, @Body() addMemberDto: AddMemberDto) {
-    return this.projectService.addMember(id, addMemberDto);
+    return this.projectsService.addMember(id, addMemberDto);
   }
 
   // Tasks
 
   @Post(':id/tasks')
   createTask(@Param('id') id: string, @Body() createTaskDto: CreateTaskDto) {
-    return this.projectService.createTask(id, createTaskDto);
+    return this.projectsService.createTask(id, createTaskDto);
   }
 
   @Patch(':id/tasks/:taskId')
@@ -62,11 +62,11 @@ export class ProjectsController {
     @Param('taskId') taskId: string,
     @Body() updateTaskDto: UpdateTaskDto,
   ) {
-    return this.projectService.updateTask(id, taskId, updateTaskDto);
+    return this.projectsService.updateTask(id, taskId, updateTaskDto);
   }
 
   @Delete(':id/tasks/:taskId')
   removeTask(@Param('id') id: string, @Param('taskId') taskId: string) {
-    return this.projectService.removeTask(id, taskId);
+    return this.projectsService.removeTask(id, taskId);
   }
 }
