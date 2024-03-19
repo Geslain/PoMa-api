@@ -3,9 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
-import { ProjectsModule } from './project/projects.module';
+import { ProjectsModule } from './projects/projects.module';
 import { UsersModule } from './users/users.module';
-import { TaskModule } from './task/task.module';
+import { TasksModule } from './tasks/tasks.module';
 
 @Module({
   imports: [
@@ -19,7 +19,7 @@ import { TaskModule } from './task/task.module';
     }),
     ProjectsModule,
     UsersModule,
-    TaskModule,
+    TasksModule,
   ],
   controllers: [AppController],
   providers: [AppService],
