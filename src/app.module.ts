@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
-import { ProjectModule } from './project/project.module';
+import { ProjectsModule } from './project/projects.module';
 import { UsersModule } from './users/users.module';
 import { TaskModule } from './task/task.module';
 
@@ -17,7 +17,7 @@ import { TaskModule } from './task/task.module';
         password: process.env.DATABASE_PASSWORD,
       },
     }),
-    ProjectModule,
+    ProjectsModule,
     UsersModule,
     TaskModule,
   ],
