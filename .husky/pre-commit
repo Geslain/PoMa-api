@@ -10,6 +10,6 @@ then
   exit 1
 fi
 
-./node_modules/.bin/lint-staged
+npx lint-staged
 docker exec 54q4r4-api yarn test
 docker exec 54q4r4-api yarn test:e2e
