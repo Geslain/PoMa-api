@@ -1,38 +1,22 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# 54q4r4 Api
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+54q4r4 Api of [54q4r4](https://github.com/Geslain/54q4r4-api) project. It has been created from [NestJS](http://nestjs.com/) project
 
 ## Installation
 
+Please refer to [54q4r4](https://github.com/Geslain/54q4r4-api) Readme file for install. This app is meant to be used with [docker](https://www.docker.com/).
+But still, for development purpose you can install with the following command:
+
 ```bash
+$ cp .env.template .env # Copy env variables
 $ yarn install
 ```
 
 ## Running the app
+
+**Don't forget that a mongo instance must run if you want to use the app without docker.**
 
 ```bash
 # development
@@ -49,24 +33,39 @@ $ yarn run start:prod
 
 ```bash
 # unit tests
+$ docker exec 54q4r4-api yarn test 
+# or 
 $ yarn run test
 
 # e2e tests
+$ docker exec 54q4r4-api yarn test:e2e
+# or
 $ yarn run test:e2e
 
 # test coverage
+$ docker exec 54q4r4-api yarn test:cov
+# or
 $ yarn run test:cov
 ```
 
-## Support
+## Documentation
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+[Swagger](https://swagger.io/) documentation can be found on `/api` url
 
-## Stay in touch
+* if you launch the app locally: http://127.0.0.1:3000/api
+* if you launch the app with docker: http://127.0.0.1:3001/api
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Development
+
+The ensure a clean and normalized development process, commit hooks have been settled on this project. You can find it in the `.husky` directory
+
+Following tools are used:
+* [husky](https://typicode.github.io/husky/)
+* [commitlint](https://commitlint.js.org/)
+* [commitizen](https://commitizen-tools.github.io/commitizen/)
+
+In addition, every time you commit, code is formatted, linted, and unit and e2e tests are launched.
+**This also means that docker must be running in order to be able to commit.**
 
 ## License
 

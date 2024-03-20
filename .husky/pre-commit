@@ -1,5 +1,15 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+containerName=54q4r4-api
+isRunning="$(docker ps -q -f name=$containerName)"
+
+if [ -z "$isRunning" ]
+then
+  echo "\n\033[31mPlease start docker container ($containerName) so test can run !\033[0m\n"
+  exit 1
+fi
+
 ./node_modules/.bin/lint-staged
-npm test
+docker exec 54q4r4-api yarn test
+docker exec 54q4r4-api yarn test:e2e
