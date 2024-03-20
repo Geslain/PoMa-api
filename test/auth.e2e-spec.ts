@@ -15,7 +15,7 @@ describe('Auth Controller (e2e)', () => {
     }),
   };
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     })
@@ -74,7 +74,7 @@ describe('Auth Controller (e2e)', () => {
     });
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     await app.close();
   });
 });
