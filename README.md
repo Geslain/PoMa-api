@@ -1,5 +1,7 @@
 # 54q4r4 Api
 
+![Saqara Logo](https://cdn.jaimelesstartups.fr/wp-content/uploads/2021/09/Logo-Saqara-1500x535.jpg
+"Saqara Logo")
 ## Description
 
 54q4r4 Api of [54q4r4](https://github.com/Geslain/54q4r4-api) project. It has been created from [NestJS](http://nestjs.com/) project
