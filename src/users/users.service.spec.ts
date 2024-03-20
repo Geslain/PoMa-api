@@ -28,6 +28,7 @@ describe('UsersService', () => {
             exec: jest.fn(),
             findOneAndUpdate: jest.fn(),
             findById: jest.fn(),
+            findOne: jest.fn(),
             findByIdAndDelete: jest.fn(),
           },
         },
@@ -66,7 +67,7 @@ describe('UsersService', () => {
     expect(updatedUser).toEqual(mockUser);
   });
 
-  it('should return an existing user', async () => {
+  it('should return an existing user (by id)', async () => {
     const userId = '1';
     jest.spyOn(model, 'findById').mockReturnValue({
       exec: jest.fn().mockResolvedValueOnce(mockUser),
@@ -74,6 +75,16 @@ describe('UsersService', () => {
 
     const user = await service.findOne(userId);
     expect(model.findById).toHaveBeenCalledWith(userId);
+    expect(user).toEqual(mockUser);
+  });
+
+  it('should return an existing user (by email)', async () => {
+    jest.spyOn(model, 'findOne').mockReturnValue({
+      exec: jest.fn().mockResolvedValueOnce(mockUser),
+    } as any);
+
+    const user = await service.findOneByEmail(mockUser.email);
+    expect(model.findOne).toHaveBeenCalledWith({ email: mockUser.email });
     expect(user).toEqual(mockUser);
   });
 

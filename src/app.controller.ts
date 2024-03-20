@@ -1,14 +1,15 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
 import { Public } from './auth/decorator/public.decorator';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
   @Public()
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getRoot(): string {
+    return 'Go to <a href="/api">/api</a> for documentation';
   }
+
+  @Public()
+  @Get('/health')
+  getHealth(): void {}
 }
