@@ -83,7 +83,7 @@ export class ProjectsController {
   }
 
   // Members
-  @Post(':id/add-member')
+  @Post(':id/members')
   @ApiOperation({ summary: 'Add a member to project' })
   @ApiResponse({
     status: 200,
@@ -92,6 +92,17 @@ export class ProjectsController {
   })
   addMember(@Param('id') id: string, @Body() addMemberDto: AddMemberDto) {
     return this.projectsService.addMember(id, addMemberDto);
+  }
+
+  @Delete(':id/members/:memberId')
+  @ApiOperation({ summary: 'Delete a member to project' })
+  @ApiResponse({
+    status: 200,
+    description: 'Updated project',
+    type: Project,
+  })
+  removeMember(@Param('id') id: string, @Param('memberId') memberId: string) {
+    return this.projectsService.removeMember(id, memberId);
   }
 
   // Tasks
