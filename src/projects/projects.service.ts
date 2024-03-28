@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, Scope } from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -7,15 +7,25 @@ import { Project } from './schema/project.schema';
 import { AddMemberDto } from './dto/add-member.dto';
 import { CreateTaskDto } from '../tasks/dto/create-task.dto';
 import { UpdateTaskDto } from '../tasks/dto/update-task.dto';
+import { REQUEST } from '@nestjs/core';
+import { Request } from 'express';
 
-@Injectable()
+@Injectable({ scope: Scope.REQUEST })
 export class ProjectsService {
   constructor(
     @InjectModel(Project.name) private projectModel: Model<Project>,
+    @Inject(REQUEST) private readonly request: Request,
   ) {}
 
   async create(createProjectDto: CreateProjectDto) {
-    return await this.projectModel.create(createProjectDto);
+    if ('user' in this.request) {
+      const requestUser = this.request.user as Record<string, string>;
+
+      return await this.projectModel.create({
+        ...createProjectDto,
+        owner: requestUser.sub,
+      });
+    }
   }
 
   findAll() {
@@ -27,6 +37,7 @@ export class ProjectsService {
       .findById(id)
       .populate('owner')
       .populate('tasks')
+      .populate('members')
       .exec();
   }
 
@@ -36,6 +47,7 @@ export class ProjectsService {
         returnOriginal: false,
       })
       .populate('owner')
+      .populate('members')
       .populate('tasks')
       .exec();
   }
@@ -51,6 +63,22 @@ export class ProjectsService {
         { $addToSet: { members: addMemberDto } },
         { returnOriginal: false },
       )
+      .populate('owner')
+      .populate('members')
+      .populate('tasks')
+      .exec();
+  }
+
+  async removeMember(id: string, memberId: string) {
+    return await this.projectModel
+      .findOneAndUpdate(
+        { _id: id, members: memberId },
+        {
+          $pull: { members: memberId },
+        },
+        { returnOriginal: false },
+      )
+      .populate('owner')
       .populate('members')
       .populate('tasks')
       .exec();
@@ -63,6 +91,7 @@ export class ProjectsService {
         { $addToSet: { tasks: createTaskDto } },
         { returnOriginal: false },
       )
+      .populate('owner')
       .populate('members')
       .populate('tasks')
       .exec();
@@ -84,6 +113,7 @@ export class ProjectsService {
         },
         { returnOriginal: false },
       )
+      .populate('owner')
       .populate('members')
       .populate('tasks')
       .exec();
@@ -98,6 +128,7 @@ export class ProjectsService {
         },
         { returnOriginal: false },
       )
+      .populate('owner')
       .populate('members')
       .populate('tasks')
       .exec();
