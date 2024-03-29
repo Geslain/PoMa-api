@@ -4,7 +4,8 @@ import { SignInDto } from './dto/sign-in.dto';
 import { Public } from './decorator/public.decorator';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthResponse } from './schema/auth-response.schema';
-
+import { SignUpDto } from './dto/sign-up.dto';
+import { User } from '../users/schema/user.schema';
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
@@ -21,5 +22,18 @@ export class AuthController {
   })
   signIn(@Body() signInDto: SignInDto) {
     return this.authService.signIn(signInDto);
+  }
+
+  @Public()
+  @HttpCode(HttpStatus.OK)
+  @Post('sign-up')
+  @ApiOperation({ summary: 'Sign up user' })
+  @ApiResponse({
+    status: 200,
+    description: 'Signed up user',
+    type: User,
+  })
+  signUp(@Body() signUpDto: SignUpDto) {
+    return this.authService.signUp(signUpDto);
   }
 }

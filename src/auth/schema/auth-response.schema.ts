@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { User } from '../../users/schema/user.schema';
 
 export class AuthResponse {
   @ApiProperty({
@@ -7,4 +8,10 @@ export class AuthResponse {
     description: 'Jwt access token',
   })
   accessToken: string;
+
+  @ApiProperty({
+    example: User,
+    description: 'Authenticated user',
+  })
+  user: User;
 }

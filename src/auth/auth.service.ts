@@ -1,7 +1,12 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { SignInDto } from './dto/sign-in.dto';
 import { JwtService } from '@nestjs/jwt';
+import { SignUpDto } from './dto/sign-up.dto';
 
 @Injectable()
 export class AuthService {
@@ -12,6 +17,8 @@ export class AuthService {
 
   async signIn(signInDto: SignInDto): Promise<any> {
     const user = await this.usersService.findOneByEmail(signInDto.email);
+
+    if (!user) throw new UnauthorizedException();
 
     const isMatch = await user.comparePassword(signInDto.password);
 
@@ -24,5 +31,15 @@ export class AuthService {
       user,
       accessToken: await this.jwtService.signAsync(payload),
     };
+  }
+
+  async signUp(signUpDto: SignUpDto) {
+    const existingUser = await this.usersService.findOneByEmail(
+      signUpDto.email,
+    );
+
+    if (existingUser) throw new ConflictException('User already exits');
+
+    return this.usersService.create(signUpDto);
   }
 }
