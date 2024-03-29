@@ -16,7 +16,9 @@ export class AuthService {
   ) {}
 
   async signIn(signInDto: SignInDto): Promise<any> {
-    const user = await this.usersService.findOneByEmail(signInDto.email);
+    const user = await this.usersService.findOneByEmail(
+      signInDto.email.toLowerCase(),
+    );
 
     if (!user) throw new UnauthorizedException();
 
@@ -35,7 +37,7 @@ export class AuthService {
 
   async signUp(signUpDto: SignUpDto) {
     const existingUser = await this.usersService.findOneByEmail(
-      signUpDto.email,
+      signUpDto.email.toLowerCase(),
     );
 
     if (existingUser) throw new ConflictException('User already exits');

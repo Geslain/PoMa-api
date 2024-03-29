@@ -11,7 +11,10 @@ export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   async create(createUserDto: CreateUserDto | SignUpDto) {
-    return await this.userModel.create(createUserDto);
+    return await this.userModel.create({
+      ...createUserDto,
+      email: createUserDto.email.toLowerCase(),
+    });
   }
 
   async findAll() {
