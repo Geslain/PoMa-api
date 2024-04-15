@@ -8,8 +8,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   const config = new DocumentBuilder()
-    .setTitle('54q4r4 Api')
-    .setDescription('The 54q4r4 Api description')
+    .setTitle('PoMa Api')
+    .setDescription('The PoMa Api description')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);

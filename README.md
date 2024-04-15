@@ -1,14 +1,14 @@
-# 54q4r4 Api
+# PoMa Api
 
-![Saqara Logo](https://cdn.jaimelesstartups.fr/wp-content/uploads/2021/09/Logo-Saqara-1500x535.jpg
-"Saqara Logo")
+![PoMa Logo](https://github.com/Geslain/PoMa/blob/main/logo.png?raw=true "PoMa Logo")
+
 ## Description
 
-54q4r4 Api of [54q4r4](https://github.com/Geslain/54q4r4-api) project. It has been created from [NestJS](http://nestjs.com/) project
+PoMa project management Api of [PoMa](https://github.com/Geslain/PoMa-api) project. It has been created from [NestJS](http://nestjs.com/) project
 
 ## Installation
 
-Please refer to [54q4r4](https://github.com/Geslain/54q4r4-api) Readme file for install. This app is meant to be used with [docker](https://www.docker.com/).
+Please refer to [PoMa](https://github.com/Geslain/PoMa-api) Readme file for install. This app is meant to be used with [docker](https://www.docker.com/).
 But still, for development purpose you can install with the following command:
 
 ```bash
@@ -35,17 +35,17 @@ $ yarn run start:prod
 
 ```bash
 # unit tests
-$ docker exec 54q4r4-api yarn test 
+$ docker exec PoMa-api yarn test 
 # or 
 $ yarn run test
 
 # e2e tests
-$ docker exec 54q4r4-api yarn test:e2e
+$ docker exec PoMa-api yarn test:e2e
 # or
 $ yarn run test:e2e
 
 # test coverage
-$ docker exec 54q4r4-api yarn test:cov
+$ docker exec PoMa-api yarn test:cov
 # or
 $ yarn run test:cov
 ```
