@@ -10,11 +10,19 @@ export class Project extends Document {
   @ApiProperty({ example: 'Important stuff', description: "Project's name" })
   name!: string;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    autopopulate: true,
+  })
   @ApiProperty({ example: User, description: "Project's owner" })
   owner!: User;
 
-  @Prop({ type: [mongoose.Schema.Types.ObjectId], ref: 'User' })
+  @Prop({
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'User',
+    autopopulate: true,
+  })
   @ApiProperty({
     isArray: true,
     example: [User],

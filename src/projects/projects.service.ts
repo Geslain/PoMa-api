@@ -29,16 +29,11 @@ export class ProjectsService {
   }
 
   findAll() {
-    return this.projectModel.find().populate('owner').populate('tasks').exec();
+    return this.projectModel.find().exec();
   }
 
   async findOne(id: string) {
-    return await this.projectModel
-      .findById(id)
-      .populate('owner')
-      .populate('tasks')
-      .populate('members')
-      .exec();
+    return await this.projectModel.findById(id).exec();
   }
 
   async update(id: string, updateProjectDto: UpdateProjectDto) {
@@ -46,9 +41,6 @@ export class ProjectsService {
       .findOneAndUpdate({ _id: id }, updateProjectDto, {
         returnOriginal: false,
       })
-      .populate('owner')
-      .populate('members')
-      .populate('tasks')
       .exec();
   }
 
@@ -63,9 +55,6 @@ export class ProjectsService {
         { $addToSet: { members: addMemberDto } },
         { returnOriginal: false },
       )
-      .populate('owner')
-      .populate('members')
-      .populate('tasks')
       .exec();
   }
 
@@ -78,9 +67,6 @@ export class ProjectsService {
         },
         { returnOriginal: false },
       )
-      .populate('owner')
-      .populate('members')
-      .populate('tasks')
       .exec();
   }
 
@@ -91,9 +77,6 @@ export class ProjectsService {
         { $addToSet: { tasks: createTaskDto } },
         { returnOriginal: false },
       )
-      .populate('owner')
-      .populate('members')
-      .populate('tasks')
       .exec();
   }
 
@@ -113,9 +96,6 @@ export class ProjectsService {
         },
         { returnOriginal: false },
       )
-      .populate('owner')
-      .populate('members')
-      .populate('tasks')
       .exec();
   }
 
@@ -128,9 +108,6 @@ export class ProjectsService {
         },
         { returnOriginal: false },
       )
-      .populate('owner')
-      .populate('members')
-      .populate('tasks')
       .exec();
   }
 }

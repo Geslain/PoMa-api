@@ -16,6 +16,11 @@ import { AuthModule } from './auth/auth.module';
         username: process.env.DATABASE_USER,
         password: process.env.DATABASE_PASSWORD,
       },
+      connectionFactory: (connection) => {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        connection.plugin(require('mongoose-autopopulate'));
+        return connection;
+      },
     }),
     AuthModule,
     ProjectsModule,
